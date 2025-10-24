@@ -1,23 +1,17 @@
-// Toggle mobile menu
-const menuToggle = document.getElementById('mobile-menu');
-const navLinks = document.querySelector('.nav-links');
+let score = 0;
+const btn = document.getElementById("clickBtn");
+const scoreDisplay = document.getElementById("score");
 
-menuToggle.addEventListener('click', () => {
-  navLinks.classList.toggle('active');
+// When button is clicked
+btn.addEventListener("click", () => {
+  score++;
+  scoreDisplay.textContent = score;
+
+  // Move button to random position
+  const x = Math.random() * (window.innerWidth - 100);
+  const y = Math.random() * (window.innerHeight - 100);
+  btn.style.left = `${x}px`;
+  btn.style.top = `${y}px`;
 });
 
-// Simple contact form handling
-const contactForm = document.getElementById('contactForm');
-contactForm.addEventListener('submit', (e) => {
-  e.preventDefault();
-  const name = document.getElementById('name').value;
-  alert(`Thank you, ${name}! Your message has been sent.`);
-  contactForm.reset();
-});
 
-// Register service worker for PWA
-if ('serviceWorker' in navigator) {
-  navigator.serviceWorker.register('service-worker.js')
-    .then(() => console.log('Service Worker Registered'))
-    .catch(err => console.error('SW registration failed:', err));
-}
